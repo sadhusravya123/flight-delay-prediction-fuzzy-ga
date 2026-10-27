@@ -139,7 +139,7 @@ The fuzzy risk score is a system-generated value, not a calibrated probability o
 ##  References
 
 1. [Hugging Face Flight Delay Dataset](https://huggingface.co/datasets/Algo0o/flight_delay)
-2. Kalić et al., *Data driven fuzzy logic system for flight delay prediction*. Verify the official publication details before citing.
+2. Kalić et al., *Data driven fuzzy logic system for flight delay prediction*(https://doi.org/10.1016/j.trpro.2026.07.017)
 3. [scikit-fuzzy Documentation](https://scikit-fuzzy.readthedocs.io/)
 4. [scikit-learn Documentation](https://scikit-learn.org/)
 
