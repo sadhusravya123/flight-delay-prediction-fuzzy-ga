@@ -2,144 +2,169 @@
 
 ## Project Overview
 
-This project predicts whether a flight's departure delay will be **15 minutes or more** using Soft Computing techniques: Fuzzy Logic and a Genetic Algorithm (GA).
+Flight delays are a major challenge in the aviation industry, affecting passengers, airline operations, and airport scheduling.
 
-Fuzzy Logic estimates flight delay risk using membership functions and IF–THEN rules. The Genetic Algorithm optimizes selected fuzzy-system parameters to improve classification performance.
+This project develops an intelligent flight delay prediction system using **Fuzzy Logic** and **Genetic Algorithm (GA)** optimization.
 
-##  Objectives
+Fuzzy Logic estimates flight delay risk using predefined rules and membership functions, while the Genetic Algorithm optimizes selected fuzzy system parameters to improve prediction performance.
 
-- Predict flight departure delays using flight-related features.
-- Implement a Fuzzy Logic inference system.
-- Optimize fuzzy parameters using a Genetic Algorithm.
-- Compare model performance using standard evaluation metrics.
-- Visualize the results using tables and graphs.
+## Objectives
+
+- Predict flight delays using Soft Computing techniques.
+- Apply Fuzzy Logic to handle uncertain flight-related conditions.
+- Optimize fuzzy system parameters using a Genetic Algorithm.
+- Compare baseline and GA-tuned model performance.
+- Evaluate models using classification metrics.
 
 ##  Dataset
 
-- **Source:** [Hugging Face — Flight Delay Dataset](https://huggingface.co/datasets/Algo0o/flight_delay)
-- **Dataset ID:** `Algo0o/flight_delay`
-- **Records:** Up to 100,000 records are sampled.
-- **Access:** Public dataset; no Kaggle API key required.
+**Source:** Hugging Face – `Algo0o/flight_delay`
 
-### Features Used
+**Target Variable:** `DEP_DEL15`
 
-| Feature | Description |
+| Value | Description |
 |---|---|
-| `CRS_DEP_TIME` | Scheduled departure time |
-| `DISTANCE` | Distance between airports |
-| `FL_DATE` | Flight date |
-| `DEP_HOUR` | Hour derived from departure time |
-| `DAY_OF_WEEK` | Day of the week |
-| `MONTH` | Month of the year |
-| `DEP_DEL15` | Target variable |
+| 0 | Flight not delayed |
+| 1 | Flight delayed by 15 minutes or more |
 
-**Target classes:**
-- `0` — Departure delay below 15 minutes.
-- `1` — Departure delay of 15 minutes or more.
+### Input Features
 
-##  Technologies Used
-
-- Python
-- Google Colab
-- Hugging Face Datasets
-- Pandas and NumPy
-- scikit-fuzzy
-- scikit-learn
-- Matplotlib
-- Genetic Algorithm
-
-## Methodology
-
-1. **Dataset Loading:** Load flight records from Hugging Face.
-2. **Preprocessing:** Clean missing and invalid values and extract relevant features.
-3. **Feature Scaling:** Normalize the inputs to a range of 0–10.
-4. **Fuzzy Logic:** Use triangular membership functions and IF–THEN rules to generate a delay-risk score.
-5. **Genetic Algorithm:** Optimize the membership-function boundary and classification threshold using F1-score as the fitness function.
-6. **Evaluation:** Compare the baseline and GA-tuned models.
-7. **Prediction:** Generate a delay classification for sample flight details.
-
-## Model Details
-
-### Fuzzy Logic
-
-The system uses four inputs:
-- Departure hour
-- Flight distance
-- Day of the week
+- Scheduled Departure Hour
+- Flight Distance
+- Day of the Week
 - Month
 
-Each input has three fuzzy sets: Low, Medium, and High. The output is a risk score between 0 and 100, which is converted into a binary prediction using a threshold.
+## ⚙️ Technologies Used
 
-### Genetic Algorithm
+| Technology | Purpose |
+|---|---|
+| Python | Programming language |
+| Pandas | Data preprocessing |
+| NumPy | Numerical operations |
+| Scikit-fuzzy | Fuzzy inference system |
+| Scikit-learn | Model evaluation |
+| Matplotlib | Visualization |
+| Seaborn | Statistical visualization |
+| Hugging Face Datasets | Dataset loading |
 
-The GA searches for better parameter combinations through:
+## 🧠 Methodology
 
-- Population initialization
-- Fitness evaluation
-- Selection
-- Crossover
-- Mutation
-- Generation replacement
+### 1. Data Preprocessing
+- Load the flight delay dataset.
+- Handle missing and invalid values.
+- Extract departure hour, day, and month.
+- Normalize numerical features.
 
-The best candidate is selected after the specified number of generations.
+### 2. Fuzzy Logic Model
 
-##  Evaluation Metrics
+The fuzzy inference system uses four input features with linguistic membership categories:
 
-The models are evaluated using:
+- Low
+- Medium
+- High
 
-- **Accuracy:** Overall proportion of correct predictions.
-- **Precision:** Correct positive predictions among all predicted positives.
-- **Recall:** Actual positive cases correctly identified.
-- **F1-score:** Balance between precision and recall.
-- **Confusion Matrix:** Summary of correct and incorrect classifications.
+IF–THEN rules are applied to estimate a flight delay risk score.
 
-The notebook generates a model comparison table and performance graph. Actual metric values should be added after running the notebook.
+### 3. Genetic Algorithm Optimization
 
-##  Sample Prediction
+The Genetic Algorithm optimizes:
 
-Example output from the notebook:
+- Membership function boundary.
+- Classification threshold.
 
-```text
-Fuzzy risk score: 16.67 / 100
-Prediction: Likely not delayed by 15+ minutes
+The optimization process includes:
+
+1. Population initialization.
+2. Fitness evaluation.
+3. Selection.
+4. Crossover.
+5. Mutation.
+6. Selection of the best-performing solution.
+
+The F1-score on validation data is used as the fitness function.
+
+### 4. Model Evaluation
+
+The baseline Fuzzy Logic model is compared with the GA-tuned Fuzzy Logic model using accuracy, precision, recall, and F1-score.
+
+## Results & Performance Analysis
+
+### Model Comparison
+
+| Evaluation Metric | Fuzzy Logic | GA-Tuned Fuzzy Logic |
+|---|---:|---:|
+| Accuracy | 74.40% | 68.60% |
+| Precision | 40.00% | 35.51% |
+| Recall | 3.17% | 30.16% |
+| F1-score | 5.88% | 32.62% |
+
+### Key Observations
+
+- Recall improved from **3.17% to 30.16%**.
+- F1-score increased from **5.88% to 32.62%**.
+- Accuracy decreased from 74.40% to 68.60%.
+- Precision decreased slightly from 40.00% to 35.51%.
+- GA optimization improved the model's ability to identify delayed flights.
+
+The results demonstrate that accuracy alone is not sufficient to evaluate flight delay prediction, particularly when identifying delayed flights is important.
+
+##  Project Visualizations
+
+The project includes visualizations of:
+
+- Flight delay distribution.
+- Genetic Algorithm optimization progress.
+- GA-tuned Fuzzy Logic model.
+- Model performance comparison.
+- Confusion matrix.
+
+## Installation and Execution
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/sadhusravya123/flight-delay-prediction-fuzzy-ga.git
 ```
 
-The fuzzy risk score is a system-generated value, not a calibrated probability of delay.
+### Step 2: Navigate to the Project
 
-## How to Run
-
-1. Open [Google Colab](https://colab.research.google.com/).
-2. Upload or open the project notebook (`.ipynb`).
-3. Install the required libraries if they are not already available:
-
-```python
-!pip install -q datasets scikit-fuzzy scikit-learn pandas numpy matplotlib
+```bash
+cd flight-delay-prediction-fuzzy-ga
 ```
 
-4. Run the notebook cells in order.
-5. Review the model metrics, confusion matrix, comparison table, and graph.
+### Step 3: Install Dependencies
 
-##  Limitations
+```bash
+pip install datasets scikit-fuzzy scikit-learn pandas numpy matplotlib seaborn
+```
 
-- The fuzzy rules are manually defined.
-- The selected features do not capture all causes of flight delays.
-- The GA uses a small population and a limited number of generations.
-- The implementation is a simplified educational model, not an exact reproduction of the referenced research paper.
-- Performance on the sampled data may not generalize to all flights.
+### Step 4: Run the Notebook
+
+Open the Jupyter Notebook:
+
+```bash
+jupyter notebook
+```
+
+Run the notebook cells sequentially to load the dataset, preprocess the data, train the fuzzy system, perform GA optimization, and evaluate the models.
 
 ##  Future Enhancements
 
-- Add weather, airline, and airport congestion data.
-- Improve the fuzzy rule base.
-- Compare against Logistic Regression, Decision Trees, and Random Forest.
-- Use larger GA populations and more generations.
-- Develop a web interface for flight delay predictions.
-- Evaluate the model on unseen flight periods.
+- Incorporate weather conditions and airport congestion data.
+- Improve fuzzy membership functions and rule coverage.
+- Compare performance with Random Forest and Logistic Regression.
+- Integrate real-time flight information.
+- Develop a web-based flight delay prediction application.
 
-##  References
+## Conclusion
 
-1. [Hugging Face Flight Delay Dataset](https://huggingface.co/datasets/Algo0o/flight_delay)
-2. Kalić et al., *Data driven fuzzy logic system for flight delay prediction*(https://doi.org/10.1016/j.trpro.2026.07.017)
-3. [scikit-fuzzy Documentation](https://scikit-fuzzy.readthedocs.io/)
-4. [scikit-learn Documentation](https://scikit-learn.org/)
+This project demonstrates how Fuzzy Logic and Genetic Algorithm optimization can be combined for flight delay prediction.
 
+The GA-tuned model achieved significant improvements in recall and F1-score compared with the baseline model. Although accuracy decreased, the optimized model identified a greater proportion of delayed flights.
+
+Further improvements in feature selection, fuzzy rule design, and optimization are required before practical deployment.
+
+
+---
+
+⭐ If you find this project interesting, consider giving the repository a star!
